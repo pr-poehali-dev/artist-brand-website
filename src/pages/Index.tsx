@@ -129,9 +129,9 @@ export default function Index() {
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in">
           <div className="mb-8 animate-float flex flex-col items-center gap-4">
             <img 
-              src="https://cdn.poehali.dev/files/0b64bc23e4f4ff97e323074a87641529-no-bg-HD (carve.photos).png"
+              src="https://cdn.poehali.dev/files/Копия 0b64bc23e4f4ff97e323074a87641529.jpg"
               alt="Colorful Bird Logo"
-              className="w-48 h-48 filter drop-shadow-2xl rounded-md object-cover"
+              className="w-48 h-48 filter drop-shadow-2xl rounded-full object-cover"
             />
             <h1 className="md:text-6xl font-bold text-primary tracking-wider text-4xl drop-shadow-lg">
               PAINT ART
