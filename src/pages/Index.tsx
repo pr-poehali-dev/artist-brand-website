@@ -127,17 +127,20 @@ export default function Index() {
         <div className="absolute inset-0 bg-black/60" />
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in">
-          <div className="mb-8 animate-float">
+          <div className="mb-8 animate-float flex flex-col items-center gap-4">
             <img 
-              src="https://cdn.poehali.dev/files/Снимок экрана 2026-01-13 в 09_42_25-edited-free (c-edited-HD (carve.photos)-2.png"
-              alt="PAINT ART Logo"
-              className="w-64 h-40 mx-auto object-contain filter drop-shadow-2xl"
+              src="https://cdn.poehali.dev/files/0b64bc23e4f4ff97e323074a87641529-no-bg-HD (carve.photos).png"
+              alt="Colorful Bird Logo"
+              className="w-48 h-48 object-contain filter drop-shadow-2xl"
             />
+            <h1 className="md:text-6xl font-bold text-primary tracking-wider text-4xl drop-shadow-lg">
+              PAINT ART
+            </h1>
           </div>
           
-          <h1 className="md:text-7xl font-bold mb-4 text-primary tracking-tight text-4xl">
+          <h2 className="md:text-3xl font-semibold mb-4 text-foreground/90 tracking-tight text-xl">
             KONSTANTIN Z
-          </h1>
+          </h2>
           
           <p className="text-xl md:text-2xl text-foreground/90 mb-12 font-decorative italic max-w-3xl mx-auto leading-relaxed">
             Художник картин будущего: искусство на стыке технологий и традиций
