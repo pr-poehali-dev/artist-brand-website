@@ -129,13 +129,13 @@ export default function Index() {
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in">
           <div className="mb-8 animate-float">
             <img 
-              src="https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/a653fca3-8a09-4b05-b5b3-fb0be3a70ad0.jpg"
-              alt="KONSTANTIN Z Logo"
-              className="w-32 h-32 mx-auto object-contain filter drop-shadow-2xl"
+              src="https://cdn.poehali.dev/files/Снимок экрана 2026-01-13 в 09_42_25-edited-free (c-edited-HD (carve.photos)-2.png"
+              alt="PAINT ART Logo"
+              className="w-64 h-40 mx-auto object-contain filter drop-shadow-2xl"
             />
           </div>
           
-          <h1 className="md:text-8xl font-bold mb-4 text-primary tracking-tight text-5xl">
+          <h1 className="md:text-7xl font-bold mb-4 text-primary tracking-tight text-4xl">
             KONSTANTIN Z
           </h1>
           
