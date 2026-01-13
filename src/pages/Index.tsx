@@ -85,6 +85,11 @@ export default function Index() {
     : artworks.filter(art => art.category === selectedCategory);
 
   const calculatePrice = () => {
+    if (!orderSize || !orderMaterial || !orderStyle || !orderDeadline) {
+      setCalculatedPrice(0);
+      return;
+    }
+    
     let basePrice = 15000;
     if (orderSize === 'medium') basePrice = 25000;
     if (orderSize === 'large') basePrice = 40000;
@@ -305,24 +310,7 @@ export default function Index() {
                 <h3 className="text-3xl font-bold text-foreground">Калькулятор стоимости</h3>
               </div>
               
-              <form onSubmit={handleOrderSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Ваше имя</Label>
-                    <Input id="name" placeholder="Иван Иванов" required />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="ivan@example.com" required />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Телефон</Label>
-                  <Input id="phone" type="tel" placeholder="+7 (999) 123-45-67" required />
-                </div>
-                
+              <div className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="size">Размер работы</Label>
@@ -396,20 +384,74 @@ export default function Index() {
                   </div>
                 )}
                 
+                {!calculatedPrice && (
+                  <div className="p-6 bg-muted/50 rounded-lg border-2 border-dashed border-muted-foreground/30">
+                    <div className="text-center">
+                      <Icon name="Info" className="mx-auto text-muted-foreground mb-2" size={32} />
+                      <p className="text-muted-foreground">Выберите параметры, чтобы узнать стоимость</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Card>
+            
+            <Card className="p-8 bg-card shadow-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-primary/20 rounded-lg">
+                  <Icon name="FileText" className="text-primary" size={28} />
+                </div>
+                <h3 className="text-3xl font-bold text-foreground">Оформить заказ</h3>
+              </div>
+              
+              <form onSubmit={handleOrderSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Ваше имя</Label>
+                    <Input id="name" placeholder="Иван Иванов" required />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" type="email" placeholder="ivan@example.com" required />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Телефон</Label>
+                  <Input id="phone" type="tel" placeholder="+7 (999) 123-45-67" required />
+                </div>
+                
                 <div className="space-y-2">
                   <Label htmlFor="description">Опишите вашу идею</Label>
                   <Textarea 
                     id="description" 
                     placeholder="Расскажите, какую работу вы хотите заказать..."
-                    className="min-h-24"
+                    className="min-h-32"
                     required
                   />
                 </div>
                 
-                <Button type="submit" size="lg" className="w-full text-lg">
+                {calculatedPrice > 0 && (
+                  <div className="p-4 bg-primary/10 rounded-lg">
+                    <h4 className="font-semibold mb-2 text-foreground">Параметры заказа:</h4>
+                    <div className="space-y-1 text-sm text-muted-foreground">
+                      {orderSize && <p>• Размер: {orderSize === 'small' ? 'Малый (до 60x80 см)' : orderSize === 'medium' ? 'Средний (80x120 см)' : 'Большой (100x150+ см)'}</p>}
+                      {orderMaterial && <p>• Материал: {orderMaterial === 'paper' ? 'Бумага' : orderMaterial === 'canvas' ? 'Холст' : 'Дерево'}</p>}
+                      {orderStyle && <p>• Стиль: {orderStyle === 'landscape' ? 'Пейзаж' : orderStyle === 'abstraction' ? 'Абстракция' : orderStyle === 'realism' ? 'Реализм' : 'Портрет'}</p>}
+                      {orderDeadline && <p>• Срок: {orderDeadline === 'standard' ? 'Стандарт (4-6 недель)' : orderDeadline === 'normal' ? 'Ускоренно (2-3 недели)' : 'Срочно (1 неделя)'}</p>}
+                      <p className="font-bold text-primary text-base mt-2">Итого: {calculatedPrice.toLocaleString()} ₽</p>
+                    </div>
+                  </div>
+                )}
+                
+                <Button type="submit" size="lg" className="w-full text-lg" disabled={!calculatedPrice}>
                   <Icon name="Send" className="mr-2" />
                   Отправить заказ
                 </Button>
+                
+                {!calculatedPrice && (
+                  <p className="text-sm text-center text-muted-foreground">Рассчитайте стоимость в калькуляторе слева</p>
+                )}
               </form>
             </Card>
             
