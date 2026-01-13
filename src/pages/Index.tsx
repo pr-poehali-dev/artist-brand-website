@@ -190,16 +190,16 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="about" className="py-24 px-4 bg-card/50">
+      <section id="about" className="px-4 bg-card/50 mx-[19px] my-0 py-[23px]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <h2 className="text-5xl font-bold mb-6 text-primary">О художнике</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6 text-right">
                 Современный художник‑иллюстратор. Создаю цифровое и традиционное искусство: 
                 от концепт‑арта до портретов. AI‑эксперименты, ручная доработка, авторские техники.
               </p>
-              <blockquote className="border-l-4 border-primary pl-6 italic text-xl font-decorative text-foreground/90 mb-6">
+              <blockquote className="border-l-4 border-primary pl-6 italic font-decorative text-foreground/90 mb-6 text-xl text-left">
                 "Искусство, которое вдохновляет. Я создаю искусство, которое вечно!"
               </blockquote>
               <div className="space-y-4">
@@ -231,11 +231,11 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="portfolio" className="py-24 px-4 bg-background">
+      <section id="portfolio" className="bg-background mx-0 my-0 px-4 py-[3px]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-12 text-center text-primary">Портфолио</h2>
+          <h2 className="text-5xl font-bold text-center text-primary px-7 py-0 my-[15px] mx-0">Портфолио</h2>
           
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
+          <div className="flex justify-center gap-4 flex-wrap mx-[5px] my-[1px] py-1 px-[60px]">
             <Button 
               variant={selectedCategory === 'all' ? 'default' : 'outline'}
               onClick={() => setSelectedCategory('all')}
@@ -298,8 +298,8 @@ export default function Index() {
 
       <section id="order" className="py-24 px-4 bg-card/50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold mb-4 text-center text-primary">Инвестировать в искусство</h2>
-          <p className="text-center text-muted-foreground mb-12 text-lg">Закажите уникальную работу специально для вас</p>
+          <h2 className="font-bold text-center text-primary px-0 my-0 mx-0 py-[18px] text-4xl">Инвестировать в искусство</h2>
+          <p className="text-center text-muted-foreground text-lg px-[18px] mx-0 py-[7px] my-[7px]">Закажите уникальную работу специально для вас</p>
           
           <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 mb-16 items-center">
             <Card className="p-8 bg-card shadow-xl">
