@@ -5,6 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Calendar } from '@/components/ui/calendar';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 
@@ -18,17 +21,64 @@ const artworks = [
 ];
 
 const courses = [
-  { id: 1, title: 'Основы масляной живописи', duration: '8 недель', price: '25 000 ₽', level: 'Начинающий' },
-  { id: 2, title: 'Портрет: техника и композиция', duration: '10 недель', price: '30 000 ₽', level: 'Продвинутый' },
-  { id: 3, title: 'Абстракция и экспрессия', duration: '6 недель', price: '22 000 ₽', level: 'Средний' },
-  { id: 4, title: 'Цифровое искусство с AI', duration: '4 недели', price: '18 000 ₽', level: 'Начинающий' },
+  { 
+    id: 1, 
+    title: 'Основы масляной живописи', 
+    duration: '8 недель', 
+    price: '25 000 ₽', 
+    level: 'Начинающий',
+    icon: 'Paintbrush',
+    video: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg',
+    topics: ['Работа с кистью и мастихином', 'Смешивание красок', 'Базовые техники нанесения', 'Работа со светом и тенью', 'Создание первой картины']
+  },
+  { 
+    id: 2, 
+    title: 'Портрет: техника и композиция', 
+    duration: '10 недель', 
+    price: '30 000 ₽', 
+    level: 'Продвинутый',
+    icon: 'User',
+    video: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg',
+    topics: ['Анатомия лица', 'Построение пропорций', 'Работа с тоном кожи', 'Передача эмоций и характера', 'Финальные штрихи и детали']
+  },
+  { 
+    id: 3, 
+    title: 'Абстракция и экспрессия', 
+    duration: '6 недель', 
+    price: '22 000 ₽', 
+    level: 'Средний',
+    icon: 'Palette',
+    video: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg',
+    topics: ['Теория цвета', 'Композиция и баланс', 'Экспериментальные техники', 'Поиск авторского стиля', 'Создание серии работ']
+  },
+  { 
+    id: 4, 
+    title: 'Цифровое искусство с AI', 
+    duration: '4 недели', 
+    price: '18 000 ₽', 
+    level: 'Начинающий',
+    icon: 'Sparkles',
+    video: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg',
+    topics: ['Введение в AI-инструменты', 'Промпт-инжиниринг', 'Работа с Midjourney и Stable Diffusion', 'Постобработка в Photoshop', 'Монетизация цифрового искусства']
+  },
+];
+
+const testimonials = [
+  { id: 1, name: 'Анна Соколова', text: 'Константин создал для меня потрясающий портрет мамы. Невероятная точность и эмоциональность!', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', rating: 5 },
+  { id: 2, name: 'Дмитрий Волков', text: 'Заказывал абстракцию для офиса. Работа превзошла все ожидания, коллеги в восторге!', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', rating: 5 },
+  { id: 3, name: 'Елена Петрова', text: 'Прошла курс по портретной живописи. Константин — прекрасный педагог, объясняет просто и понятно.', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', rating: 5 },
+  { id: 4, name: 'Михаил Орлов', text: 'Купил картину на годовщину свадьбы. Жена плакала от счастья. Спасибо за такой подарок!', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', rating: 5 },
 ];
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [orderSize, setOrderSize] = useState('');
   const [orderMaterial, setOrderMaterial] = useState('');
+  const [orderStyle, setOrderStyle] = useState('');
+  const [orderDeadline, setOrderDeadline] = useState('');
   const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [expandedCourse, setExpandedCourse] = useState<string>('');
 
   const filteredArtworks = selectedCategory === 'all' 
     ? artworks 
@@ -40,6 +90,11 @@ export default function Index() {
     if (orderSize === 'large') basePrice = 40000;
     if (orderMaterial === 'canvas') basePrice += 5000;
     if (orderMaterial === 'wood') basePrice += 8000;
+    if (orderStyle === 'portrait') basePrice += 10000;
+    if (orderStyle === 'realism') basePrice += 8000;
+    if (orderStyle === 'abstraction') basePrice += 3000;
+    if (orderDeadline === 'urgent') basePrice += 15000;
+    if (orderDeadline === 'normal') basePrice += 5000;
     setCalculatedPrice(basePrice);
   };
 
@@ -237,88 +292,235 @@ export default function Index() {
       </section>
 
       <section id="order" className="py-24 px-4 bg-card/50">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-5xl font-bold mb-4 text-center text-primary">Инвестировать в искусство</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">Закажите уникальную работу специально для вас</p>
           
-          <Card className="p-8 bg-card shadow-xl">
-            <form onSubmit={handleOrderSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Ваше имя</Label>
-                  <Input id="name" placeholder="Иван Иванов" required />
+          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+            <Card className="p-8 bg-card shadow-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-primary/20 rounded-lg">
+                  <Icon name="Calculator" className="text-primary" size={28} />
+                </div>
+                <h3 className="text-3xl font-bold text-foreground">Калькулятор стоимости</h3>
+              </div>
+              
+              <form onSubmit={handleOrderSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Ваше имя</Label>
+                    <Input id="name" placeholder="Иван Иванов" required />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" type="email" placeholder="ivan@example.com" required />
+                  </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="ivan@example.com" required />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="phone">Телефон</Label>
-                <Input id="phone" type="tel" placeholder="+7 (999) 123-45-67" required />
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="size">Размер работы</Label>
-                  <Select value={orderSize} onValueChange={(value) => { setOrderSize(value); calculatePrice(); }}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите размер" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="small">Малый (до 60x80 см)</SelectItem>
-                      <SelectItem value="medium">Средний (80x120 см)</SelectItem>
-                      <SelectItem value="large">Большой (100x150+ см)</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="phone">Телефон</Label>
+                  <Input id="phone" type="tel" placeholder="+7 (999) 123-45-67" required />
                 </div>
                 
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="size">Размер работы</Label>
+                    <Select value={orderSize} onValueChange={(value) => { setOrderSize(value); calculatePrice(); }}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите размер" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="small">Малый (до 60x80 см)</SelectItem>
+                        <SelectItem value="medium">Средний (80x120 см)</SelectItem>
+                        <SelectItem value="large">Большой (100x150+ см)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="material">Материал</Label>
+                    <Select value={orderMaterial} onValueChange={(value) => { setOrderMaterial(value); calculatePrice(); }}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите материал" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="paper">Бумага</SelectItem>
+                        <SelectItem value="canvas">Холст (+5 000 ₽)</SelectItem>
+                        <SelectItem value="wood">Дерево (+8 000 ₽)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="style">Стиль работы</Label>
+                    <Select value={orderStyle} onValueChange={(value) => { setOrderStyle(value); calculatePrice(); }}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите стиль" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="landscape">Пейзаж</SelectItem>
+                        <SelectItem value="abstraction">Абстракция (+3 000 ₽)</SelectItem>
+                        <SelectItem value="realism">Реализм (+8 000 ₽)</SelectItem>
+                        <SelectItem value="portrait">Портрет (+10 000 ₽)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="deadline">Сроки выполнения</Label>
+                    <Select value={orderDeadline} onValueChange={(value) => { setOrderDeadline(value); calculatePrice(); }}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите срок" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="standard">Стандарт (4-6 недель)</SelectItem>
+                        <SelectItem value="normal">Ускоренно (2-3 недели, +5 000 ₽)</SelectItem>
+                        <SelectItem value="urgent">Срочно (1 неделя, +15 000 ₽)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                {calculatedPrice > 0 && (
+                  <div className="p-6 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg border-2 border-primary animate-scale-in">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Итоговая стоимость:</p>
+                        <p className="text-4xl font-bold text-primary">{calculatedPrice.toLocaleString()} ₽</p>
+                      </div>
+                      <Icon name="TrendingUp" className="text-primary" size={48} />
+                    </div>
+                  </div>
+                )}
+                
                 <div className="space-y-2">
-                  <Label htmlFor="material">Материал</Label>
-                  <Select value={orderMaterial} onValueChange={(value) => { setOrderMaterial(value); calculatePrice(); }}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите материал" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="paper">Бумага</SelectItem>
-                      <SelectItem value="canvas">Холст</SelectItem>
-                      <SelectItem value="wood">Дерево</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="description">Опишите вашу идею</Label>
+                  <Textarea 
+                    id="description" 
+                    placeholder="Расскажите, какую работу вы хотите заказать..."
+                    className="min-h-24"
+                    required
+                  />
                 </div>
-              </div>
-              
-              {calculatedPrice > 0 && (
-                <div className="p-4 bg-primary/10 rounded-lg border-2 border-primary animate-scale-in">
-                  <p className="text-center text-lg">
-                    Ориентировочная стоимость: <span className="text-2xl font-bold text-primary">{calculatedPrice.toLocaleString()} ₽</span>
-                  </p>
+                
+                <Button type="submit" size="lg" className="w-full text-lg">
+                  <Icon name="Send" className="mr-2" />
+                  Отправить заказ
+                </Button>
+              </form>
+            </Card>
+            
+            <div className="space-y-6">
+              <Card className="p-6 bg-card">
+                <div className="flex items-center gap-3 mb-4">
+                  <Icon name="Shield" className="text-primary" size={24} />
+                  <h3 className="text-2xl font-bold text-foreground">Почему мне доверяют?</h3>
                 </div>
-              )}
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Icon name="CheckCircle" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-semibold text-foreground">Гарантия качества</p>
+                      <p className="text-sm text-muted-foreground">Бесплатные правки до полного утверждения</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Icon name="Clock" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-semibold text-foreground">Соблюдение сроков</p>
+                      <p className="text-sm text-muted-foreground">Договор с прописанными датами</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Icon name="Sparkles" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-semibold text-foreground">Уникальность</p>
+                      <p className="text-sm text-muted-foreground">Каждая работа — авторская и неповторимая</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Icon name="Award" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-semibold text-foreground">Опыт 15+ лет</p>
+                      <p className="text-sm text-muted-foreground">200+ довольных клиентов</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
               
-              <div className="space-y-2">
-                <Label htmlFor="description">Опишите вашу идею</Label>
-                <Textarea 
-                  id="description" 
-                  placeholder="Расскажите, какую работу вы хотите заказать..."
-                  className="min-h-32"
-                  required
-                />
-              </div>
-              
-              <Button type="submit" size="lg" className="w-full text-lg">
-                <Icon name="Send" className="mr-2" />
-                Отправить заказ
-              </Button>
-            </form>
+              <Card className="p-6 bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary">
+                <div className="text-center">
+                  <Icon name="Gift" className="mx-auto text-primary mb-3" size={48} />
+                  <h3 className="text-2xl font-bold mb-2 text-foreground">Подарок при заказе</h3>
+                  <p className="text-muted-foreground mb-4">Бесплатный эскиз + консультация по размещению</p>
+                  <div className="flex items-center justify-center gap-2 text-sm">
+                    <Icon name="Star" className="text-primary" size={16} />
+                    <span className="text-foreground font-semibold">При заказе от 50 000 ₽</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+          
+          <div className="mb-16">
+            <h3 className="text-4xl font-bold mb-8 text-center text-foreground">Отзывы клиентов</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <Card 
+                  key={testimonial.id} 
+                  className="p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex gap-1 mb-3">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Icon key={i} name="Star" className="text-primary fill-primary" size={16} />
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4 italic">"{testimonial.text}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full overflow-hidden">
+                      <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                    </div>
+                    <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+          
+          <Card className="p-8 bg-card">
+            <h3 className="text-3xl font-bold mb-6 text-center text-foreground">Примеры успешных заказов</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'Портрет семьи', desc: '120x150 см, холст, масло', price: '65 000 ₽' },
+                { title: 'Абстракция для офиса', desc: '200x100 см, холст', price: '45 000 ₽' },
+                { title: 'Городской пейзаж', desc: '80x120 см, дерево', price: '38 000 ₽' },
+              ].map((project, index) => (
+                <Card key={index} className="overflow-hidden group cursor-pointer">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src="https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg"
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h4 className="font-bold text-lg mb-2 text-foreground">{project.title}</h4>
+                    <p className="text-sm text-muted-foreground mb-2">{project.desc}</p>
+                    <p className="text-primary font-bold">{project.price}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </Card>
         </div>
       </section>
 
       <section id="courses" className="py-24 px-4 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-5xl font-bold mb-4 text-center text-primary">АРТ-СТАРТ</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">Обучение искусству от практикующего художника</p>
           
@@ -326,48 +528,139 @@ export default function Index() {
             {courses.map((course, index) => (
               <Card 
                 key={course.id} 
-                className="p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
+                className="overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-primary/20 rounded-lg">
-                    <Icon name="Palette" className="text-primary" size={32} />
+                <div className="relative group cursor-pointer">
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={course.video}
+                      alt={course.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-2 text-foreground">{course.title}</h3>
-                    <div className="flex gap-2 mb-3">
-                      <span className="px-3 py-1 bg-secondary/20 text-secondary text-sm rounded-full">
-                        {course.level}
-                      </span>
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center">
+                      <Icon name="Play" className="text-white ml-1" size={32} />
                     </div>
                   </div>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Icon name="Clock" size={20} />
-                    <span>{course.duration}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Icon name="DollarSign" size={20} />
-                    <span className="text-xl font-bold text-primary">{course.price}</span>
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-primary rounded-full">
+                    <span className="text-white text-sm font-semibold">{course.level}</span>
                   </div>
                 </div>
                 
-                <Button className="w-full" size="lg">
-                  <Icon name="Calendar" className="mr-2" />
-                  Записаться на курс
-                </Button>
+                <div className="p-8">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-primary/20 rounded-lg">
+                      <Icon name={course.icon as any} className="text-primary" size={32} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-2 text-foreground">{course.title}</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Icon name="Clock" size={20} />
+                      <span>{course.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="DollarSign" className="text-primary" size={20} />
+                      <span className="text-xl font-bold text-primary">{course.price}</span>
+                    </div>
+                  </div>
+                  
+                  <Accordion type="single" collapsible className="mb-6">
+                    <AccordionItem value="topics" className="border-none">
+                      <AccordionTrigger className="text-foreground hover:text-primary">
+                        <div className="flex items-center gap-2">
+                          <Icon name="BookOpen" size={20} />
+                          <span>Программа курса</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="space-y-2 mt-2">
+                          {course.topics.map((topic, i) => (
+                            <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                              <Icon name="CheckCircle" className="text-primary mt-0.5 flex-shrink-0" size={16} />
+                              <span className="text-sm">{topic}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="w-full" size="lg">
+                        <Icon name="Calendar" className="mr-2" />
+                        Записаться на курс
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl">
+                      <DialogHeader>
+                        <DialogTitle>Выберите дату начала курса</DialogTitle>
+                      </DialogHeader>
+                      <div className="py-4">
+                        <div className="mb-6">
+                          <h4 className="font-semibold mb-2 text-foreground">{course.title}</h4>
+                          <p className="text-sm text-muted-foreground">Продолжительность: {course.duration} • Стоимость: {course.price}</p>
+                        </div>
+                        
+                        <div className="mb-6">
+                          <h4 className="font-semibold mb-3 text-foreground">Доступные даты старта:</h4>
+                          <div className="grid grid-cols-2 gap-3">
+                            {[
+                              { date: '15 февраля', places: 3 },
+                              { date: '1 марта', places: 5 },
+                              { date: '15 марта', places: 2 },
+                              { date: '1 апреля', places: 8 },
+                            ].map((slot, i) => (
+                              <Button 
+                                key={i} 
+                                variant="outline" 
+                                className="justify-between h-auto py-3"
+                                onClick={() => {
+                                  toast.success(`Выбрана дата: ${slot.date}`);
+                                }}
+                              >
+                                <span>{slot.date}</span>
+                                <span className="text-xs text-muted-foreground">{slot.places} мест</span>
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <Input placeholder="Ваше имя" />
+                          <Input placeholder="Email" type="email" />
+                          <Input placeholder="Телефон" type="tel" />
+                          <Button className="w-full" size="lg" onClick={() => {
+                            toast.success('Заявка отправлена! Я свяжусь с вами в ближайшее время.');
+                          }}>
+                            <Icon name="Send" className="mr-2" />
+                            Отправить заявку
+                          </Button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </Card>
             ))}
           </div>
           
           <Card className="mt-12 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 border-2 border-primary">
             <div className="text-center">
+              <div className="inline-block p-4 bg-primary/20 rounded-full mb-4">
+                <Icon name="Video" className="text-primary" size={48} />
+              </div>
               <h3 className="text-3xl font-bold mb-4 text-foreground">Бесплатный вебинар</h3>
               <p className="text-xl mb-6 text-muted-foreground font-decorative italic">
                 «5 секретов композиции в живописи»
               </p>
+              <p className="text-muted-foreground mb-6">Узнайте, как создавать гармоничные композиции и привлекать внимание зрителя</p>
               <Button size="lg" className="bg-primary hover:bg-primary/90">
                 <Icon name="Video" className="mr-2" />
                 Записаться бесплатно
