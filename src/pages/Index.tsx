@@ -131,22 +131,22 @@ export default function Index() {
             <img 
               src="https://cdn.poehali.dev/files/0b64bc23e4f4ff97e323074a87641529-no-bg-HD (carve.photos).png"
               alt="Colorful Bird Logo"
-              className="w-48 h-48 object-contain filter drop-shadow-2xl"
+              className="w-48 h-48 filter drop-shadow-2xl rounded-md object-cover"
             />
             <h1 className="md:text-6xl font-bold text-primary tracking-wider text-4xl drop-shadow-lg">
               PAINT ART
             </h1>
           </div>
           
-          <h2 className="md:text-3xl font-semibold mb-4 text-foreground/90 tracking-tight text-xl">
+          <h2 className="md:text-3xl font-semibold mb-4 text-foreground/90 tracking-tight text-5xl">
             KONSTANTIN Z
           </h2>
           
-          <p className="md:text-2xl text-foreground/90 mb-12 font-decorative italic max-w-3xl mx-auto leading-relaxed py-[26px] text-4xl font-bold">
+          <p className="md:text-2xl text-foreground/90 font-decorative italic max-w-3xl leading-relaxed font-bold text-5xl px-[9px] mx-[99px] my-[13px] py-6">
             Художник картин будущего: искусство на стыке технологий и традиций
           </p>
           
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center px-[9px] py-[37px] my-6">
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
