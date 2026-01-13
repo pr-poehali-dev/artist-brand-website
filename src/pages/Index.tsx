@@ -135,7 +135,7 @@ export default function Index() {
             />
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold mb-4 text-primary tracking-tight">
+          <h1 className="md:text-8xl font-bold mb-4 text-primary tracking-tight text-5xl">
             KONSTANTIN Z
           </h1>
           
