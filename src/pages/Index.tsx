@@ -301,7 +301,7 @@ export default function Index() {
           <h2 className="text-5xl font-bold mb-4 text-center text-primary">Инвестировать в искусство</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">Закажите уникальную работу специально для вас</p>
           
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 mb-16 items-center">
             <Card className="p-8 bg-card shadow-xl">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-primary/20 rounded-lg">
@@ -395,7 +395,23 @@ export default function Index() {
               </div>
             </Card>
             
-            <Card className="p-8 bg-card shadow-xl">
+            <div className="hidden lg:flex flex-col items-center justify-center">
+              <div className={`transition-all duration-500 ${calculatedPrice > 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center animate-pulse">
+                    <Icon name="ArrowRight" className="text-primary" size={24} />
+                  </div>
+                  <div className="h-16 w-0.5 bg-gradient-to-b from-primary to-transparent"></div>
+                  <Icon name="ArrowDown" className="text-primary animate-bounce" size={24} />
+                  <div className="h-16 w-0.5 bg-gradient-to-t from-primary to-transparent"></div>
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center animate-pulse">
+                    <Icon name="Send" className="text-primary" size={20} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <Card className={`p-8 bg-card shadow-xl transition-all duration-500 ${calculatedPrice > 0 ? 'ring-2 ring-primary/50 shadow-primary/20' : ''}`}>
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-primary/20 rounded-lg">
                   <Icon name="FileText" className="text-primary" size={28} />
