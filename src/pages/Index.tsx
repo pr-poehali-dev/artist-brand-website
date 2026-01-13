@@ -142,7 +142,7 @@ export default function Index() {
             KONSTANTIN Z
           </h2>
           
-          <p className="text-xl md:text-2xl text-foreground/90 mb-12 font-decorative italic max-w-3xl mx-auto leading-relaxed">
+          <p className="md:text-2xl text-foreground/90 mb-12 font-decorative italic max-w-3xl mx-auto leading-relaxed py-[26px] text-4xl font-bold">
             Художник картин будущего: искусство на стыке технологий и традиций
           </p>
           
