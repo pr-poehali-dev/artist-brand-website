@@ -77,6 +77,11 @@ export default function Index() {
   const [orderStyle, setOrderStyle] = useState('');
   const [orderDeadline, setOrderDeadline] = useState('');
   const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [artSize, setArtSize] = useState('');
+  const [artTechnique, setArtTechnique] = useState('');
+  const [artStyle, setArtStyle] = useState('');
+  const [artDeadline, setArtDeadline] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [expandedCourse, setExpandedCourse] = useState<string>('');
 
@@ -101,6 +106,42 @@ export default function Index() {
     if (orderDeadline === 'urgent') basePrice += 15000;
     if (orderDeadline === 'normal') basePrice += 5000;
     setCalculatedPrice(basePrice);
+  };
+
+  const calculateNewPrice = () => {
+    if (!artSize || !artTechnique || !artStyle || !artDeadline) {
+      return;
+    }
+
+    let price = 0;
+
+    // Размер
+    if (artSize === 'small') price += 1000; // до А3
+    if (artSize === 'medium') price += 3000; // от А3 до А1
+    if (artSize === 'large') price += 5000; // от А1
+
+    // Техника
+    if (artTechnique === 'pencil') price += 1000;
+    if (artTechnique === 'graphics') price += 1500;
+    if (artTechnique === 'watercolor') price += 2000;
+    if (artTechnique === 'acrylic') price += 3000;
+    if (artTechnique === 'oil') price += 5000;
+
+    // Стиль
+    if (artStyle === 'caricature') price += 1000;
+    if (artStyle === 'landscape') price += 3000;
+    if (artStyle === 'portrait') price += 5000;
+    if (artStyle === 'story') price += 7000;
+    if (artStyle === 'family3') price += 10000;
+    if (artStyle === 'family4') price += 20000;
+
+    // Сроки
+    if (artDeadline === 'month') price += 500;
+    if (artDeadline === 'week') price += 1000;
+    if (artDeadline === 'days3') price += 2000;
+    if (artDeadline === 'day') price += 5000;
+
+    setTotalPrice(price);
   };
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -304,10 +345,124 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="order" className="py-24 px-4 bg-card/50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="font-bold text-center text-primary px-0 my-0 mx-0 py-[18px] text-4xl">Инвестировать в искусство</h2>
-          <p className="text-center text-muted-foreground text-lg px-[18px] mx-0 py-[7px] my-[7px]">Закажите уникальную работу специально для вас</p>
+      <section id="order" className="py-24 px-4 bg-card/50 relative" style={{
+        backgroundImage: 'url(PLACEHOLDER_IMAGE_URL)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <h2 className="font-bold text-center text-white px-0 my-0 mx-0 py-[18px] text-4xl drop-shadow-lg">Инвестировать в искусство</h2>
+          <p className="text-center text-white/90 text-lg px-[18px] mx-0 py-[7px] my-[7px] drop-shadow">Закажите уникальную работу специально для вас</p>
+          
+          <Card className="p-8 bg-card/95 backdrop-blur shadow-2xl mb-8 max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 bg-primary/20 rounded-lg">
+                <Icon name="Calculator" className="text-primary" size={28} />
+              </div>
+              <h3 className="text-3xl font-bold text-foreground">Калькулятор стоимости картины</h3>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="art-size">Размер работы</Label>
+                  <Select value={artSize} onValueChange={setArtSize}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите размер" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="small">До А3 - 1 000 ₽</SelectItem>
+                      <SelectItem value="medium">От А3 до А1 - 3 000 ₽</SelectItem>
+                      <SelectItem value="large">От А1 - 5 000 ₽</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="art-technique">Техника исполнения</Label>
+                  <Select value={artTechnique} onValueChange={setArtTechnique}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите технику" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pencil">Карандаши - 1 000 ₽</SelectItem>
+                      <SelectItem value="graphics">Графика - 1 500 ₽</SelectItem>
+                      <SelectItem value="watercolor">Акварель - 2 000 ₽</SelectItem>
+                      <SelectItem value="acrylic">Акрил/Гуашь - 3 000 ₽</SelectItem>
+                      <SelectItem value="oil">Масло - 5 000 ₽</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="art-style">Стиль работы</Label>
+                  <Select value={artStyle} onValueChange={setArtStyle}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите стиль" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="caricature">Шарж - 1 000 ₽</SelectItem>
+                      <SelectItem value="landscape">Пейзаж - 3 000 ₽</SelectItem>
+                      <SelectItem value="portrait">Портрет - 5 000 ₽</SelectItem>
+                      <SelectItem value="story">Сюжетная картина - 7 000 ₽</SelectItem>
+                      <SelectItem value="family3">Портрет семейный до 3 человек - 10 000 ₽</SelectItem>
+                      <SelectItem value="family4">Картина семьи от 4 человек - 20 000 ₽</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="art-deadline">Сроки выполнения</Label>
+                  <Select value={artDeadline} onValueChange={setArtDeadline}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите срок" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="month">До 1 месяца - 500 ₽</SelectItem>
+                      <SelectItem value="week">До 1 недели - 1 000 ₽</SelectItem>
+                      <SelectItem value="days3">До 3 дней - 2 000 ₽</SelectItem>
+                      <SelectItem value="day">День в день - 5 000 ₽</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <Button 
+                onClick={calculateNewPrice} 
+                size="lg" 
+                className="w-full text-lg"
+                disabled={!artSize || !artTechnique || !artStyle || !artDeadline}
+              >
+                <Icon name="Calculator" className="mr-2" />
+                Рассчитать стоимость
+              </Button>
+              
+              {totalPrice > 0 && (
+                <div className="p-6 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg border-2 border-primary animate-scale-in">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Итоговая стоимость:</p>
+                      <p className="text-4xl font-bold text-primary">{totalPrice.toLocaleString()} ₽</p>
+                    </div>
+                    <Icon name="TrendingUp" className="text-primary" size={48} />
+                  </div>
+                </div>
+              )}
+              
+              {!totalPrice && (
+                <div className="p-6 bg-muted/50 rounded-lg border-2 border-dashed border-muted-foreground/30">
+                  <div className="text-center">
+                    <Icon name="Info" className="mx-auto text-muted-foreground mb-2" size={32} />
+                    <p className="text-muted-foreground">Выберите все параметры и нажмите "Рассчитать"</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
           
           <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 mb-16 items-center">
             <Card className="p-8 bg-card shadow-xl">
