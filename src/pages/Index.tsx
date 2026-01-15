@@ -346,12 +346,12 @@ export default function Index() {
       </section>
 
       <section id="order" className="py-24 px-4 bg-card/50 relative" style={{
-        backgroundImage: 'url(PLACEHOLDER_IMAGE_URL)',
+        backgroundImage: 'url(https://cdn.poehali.dev/files/ормдп.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/75 backdrop-blur-[2px]" />
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="font-bold text-center text-white px-0 my-0 mx-0 py-[18px] text-4xl drop-shadow-lg">Инвестировать в искусство</h2>
           <p className="text-center text-white/90 text-lg px-[18px] mx-0 py-[7px] my-[7px] drop-shadow">Закажите уникальную работу специально для вас</p>
