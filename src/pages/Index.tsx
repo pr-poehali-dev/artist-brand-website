@@ -190,15 +190,6 @@ export default function Index() {
           <div className="flex flex-wrap gap-4 justify-center px-[9px] py-[37px] my-6">
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-primary/50 animate-pulse"
-              onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Icon name="Phone" className="mr-2" />
-              Заказать консультацию
-            </Button>
-            
-            <Button 
-              size="lg" 
               variant="outline"
               className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
@@ -472,6 +463,18 @@ export default function Index() {
               )}
             </div>
           </Card>
+          
+          <div className="flex justify-center my-12">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white hover:text-black font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.open('https://wa.me/79000000000', '_blank')}
+            >
+              <Icon name="Phone" className="mr-2" />
+              Заказать консультацию
+            </Button>
+          </div>
           
           <div className="space-y-6 max-w-4xl mx-auto mt-12">
               <Card className="p-6 bg-card">
