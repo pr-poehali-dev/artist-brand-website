@@ -356,7 +356,7 @@ export default function Index() {
           <h2 className="font-bold text-center text-white px-0 my-0 mx-0 py-[18px] text-4xl drop-shadow-lg">Инвестировать в искусство</h2>
           <p className="text-center text-white/90 text-lg px-[18px] mx-0 py-[7px] my-[7px] drop-shadow">Закажите уникальную работу специально для вас</p>
           
-          <Card className="p-8 bg-card/95 backdrop-blur shadow-2xl mb-8 max-w-4xl mx-auto">
+          <Card className="p-8 bg-card/95 backdrop-blur shadow-2xl mb-8 max-w-4xl mx-auto animate-slide-up">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-primary/20 rounded-lg">
                 <Icon name="Calculator" className="text-primary" size={28} />
