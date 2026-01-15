@@ -149,7 +149,8 @@ export default function Index() {
           <div className="flex flex-wrap gap-4 justify-center px-[9px] py-[37px] my-6">
             <Button 
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+              variant="outline"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Icon name="Image" className="mr-2" />
@@ -208,7 +209,7 @@ export default function Index() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Icon name="Award" className="text-primary" size={24} />
-                  <span className="text-muted-foreground">Более 50 персональных выставок</span>
+                  <span className="text-muted-foreground">Интерактивные выставки с тематическим погружением</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Icon name="Users" className="text-primary" size={24} />
@@ -217,6 +218,10 @@ export default function Index() {
                 <div className="flex items-center gap-3">
                   <Icon name="Palette" className="text-primary" size={24} />
                   <span className="text-muted-foreground">Уникальный стиль на стыке технологий</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Icon name="Briefcase" className="text-primary" size={24} />
+                  <span className="text-muted-foreground">Создание и проведение арт-тренингов</span>
                 </div>
               </div>
             </div>
