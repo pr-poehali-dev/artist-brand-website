@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Calendar } from '@/components/ui/calendar';
 import Icon from '@/components/ui/icon';
@@ -77,10 +78,16 @@ export default function Index() {
   const [orderStyle, setOrderStyle] = useState('');
   const [orderDeadline, setOrderDeadline] = useState('');
   const [calculatedPrice, setCalculatedPrice] = useState(0);
-  const [artSize, setArtSize] = useState('');
+  const [artWidth, setArtWidth] = useState('');
+  const [artHeight, setArtHeight] = useState('');
   const [artTechnique, setArtTechnique] = useState('');
-  const [artStyle, setArtStyle] = useState('');
+  const [artComplexity, setArtComplexity] = useState('');
   const [artDeadline, setArtDeadline] = useState('');
+  const [artSkill, setArtSkill] = useState('');
+  const [extraSketch, setExtraSketch] = useState(false);
+  const [extraFrame, setExtraFrame] = useState(false);
+  const [extraDelivery, setExtraDelivery] = useState(false);
+  const [extraCertificate, setExtraCertificate] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [expandedCourse, setExpandedCourse] = useState<string>('');
@@ -109,39 +116,40 @@ export default function Index() {
   };
 
   const calculateNewPrice = () => {
-    if (!artSize || !artTechnique || !artStyle || !artDeadline) {
+    const width = parseFloat(artWidth);
+    const height = parseFloat(artHeight);
+    
+    if (!width || !height || !artTechnique || !artComplexity || !artDeadline || !artSkill) {
+      toast.error('Заполните все обязательные поля');
       return;
     }
 
-    let price = 0;
+    const areaDM2 = (width * height) / 100;
 
-    // Размер
-    if (artSize === 'small') price += 1000; // до А3
-    if (artSize === 'medium') price += 3000; // от А3 до А1
-    if (artSize === 'large') price += 5000; // от А1
+    let baseRate = 500;
+    if (width <= 20 && height <= 20) {
+      baseRate = 500;
+    } else if (width <= 50 && height <= 50) {
+      baseRate = 1000;
+    } else {
+      baseRate = 1500;
+    }
 
-    // Техника
-    if (artTechnique === 'pencil') price += 1000;
-    if (artTechnique === 'graphics') price += 1500;
-    if (artTechnique === 'watercolor') price += 2000;
-    if (artTechnique === 'acrylic') price += 3000;
-    if (artTechnique === 'oil') price += 5000;
+    const techniqueCoef = parseFloat(artTechnique);
+    const complexityCoef = parseFloat(artComplexity);
+    const deadlineCoef = parseFloat(artDeadline);
+    const skillCoef = parseFloat(artSkill);
 
-    // Стиль
-    if (artStyle === 'caricature') price += 1000;
-    if (artStyle === 'landscape') price += 3000;
-    if (artStyle === 'portrait') price += 5000;
-    if (artStyle === 'story') price += 7000;
-    if (artStyle === 'family3') price += 10000;
-    if (artStyle === 'family4') price += 20000;
+    let extras = 0;
+    if (extraSketch) extras += 1500;
+    if (extraFrame) extras += 3000;
+    if (extraDelivery) extras += 1000;
+    if (extraCertificate) extras += 1000;
 
-    // Сроки
-    if (artDeadline === 'month') price += 500;
-    if (artDeadline === 'week') price += 1000;
-    if (artDeadline === 'days3') price += 2000;
-    if (artDeadline === 'day') price += 5000;
+    const total = Math.round((areaDM2 * baseRate) * techniqueCoef * complexityCoef * deadlineCoef * skillCoef + extras);
 
-    setTotalPrice(price);
+    setTotalPrice(total);
+    toast.success('Стоимость рассчитана!');
   };
 
   const handleContactSubmit = (e: React.FormEvent) => {
@@ -367,19 +375,31 @@ export default function Index() {
             <div className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="art-size">Размер работы</Label>
-                  <Select value={artSize} onValueChange={setArtSize}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите размер" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="small">До А3 - 1 000 ₽</SelectItem>
-                      <SelectItem value="medium">От А3 до А1 - 3 000 ₽</SelectItem>
-                      <SelectItem value="large">От А1 - 5 000 ₽</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="art-width">Ширина (см)</Label>
+                  <Input 
+                    id="art-width"
+                    type="number" 
+                    placeholder="Например, 30"
+                    value={artWidth}
+                    onChange={(e) => setArtWidth(e.target.value)}
+                    min="1"
+                  />
                 </div>
                 
+                <div className="space-y-2">
+                  <Label htmlFor="art-height">Высота (см)</Label>
+                  <Input 
+                    id="art-height"
+                    type="number" 
+                    placeholder="Например, 40"
+                    value={artHeight}
+                    onChange={(e) => setArtHeight(e.target.value)}
+                    min="1"
+                  />
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="art-technique">Техника исполнения</Label>
                   <Select value={artTechnique} onValueChange={setArtTechnique}>
@@ -387,11 +407,25 @@ export default function Index() {
                       <SelectValue placeholder="Выберите технику" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pencil">Карандаши - 1 000 ₽</SelectItem>
-                      <SelectItem value="graphics">Графика - 1 500 ₽</SelectItem>
-                      <SelectItem value="watercolor">Акварель - 2 000 ₽</SelectItem>
-                      <SelectItem value="acrylic">Акрил/Гуашь - 3 000 ₽</SelectItem>
-                      <SelectItem value="oil">Масло - 5 000 ₽</SelectItem>
+                      <SelectItem value="1.0">Масло на холсте</SelectItem>
+                      <SelectItem value="0.9">Акрил</SelectItem>
+                      <SelectItem value="0.8">Акварель/гуашь</SelectItem>
+                      <SelectItem value="0.7">Пастель/графит</SelectItem>
+                      <SelectItem value="1.2">Смешанная техника</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="art-complexity">Сложность композиции</Label>
+                  <Select value={artComplexity} onValueChange={setArtComplexity}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите сложность" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1.0">Простой мотив (абстракция, один объект)</SelectItem>
+                      <SelectItem value="1.3">Средняя (пейзаж, натюрморт 3-5 объектов)</SelectItem>
+                      <SelectItem value="1.8">Высокая (портрет, многофигурная сцена)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -399,35 +433,77 @@ export default function Index() {
               
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="art-style">Стиль работы</Label>
-                  <Select value={artStyle} onValueChange={setArtStyle}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите стиль" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="caricature">Шарж - 1 000 ₽</SelectItem>
-                      <SelectItem value="landscape">Пейзаж - 3 000 ₽</SelectItem>
-                      <SelectItem value="portrait">Портрет - 5 000 ₽</SelectItem>
-                      <SelectItem value="story">Сюжетная картина - 7 000 ₽</SelectItem>
-                      <SelectItem value="family3">Портрет семейный до 3 человек - 10 000 ₽</SelectItem>
-                      <SelectItem value="family4">Картина семьи от 4 человек - 20 000 ₽</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="art-deadline">Сроки выполнения</Label>
+                  <Label htmlFor="art-deadline">Срок исполнения</Label>
                   <Select value={artDeadline} onValueChange={setArtDeadline}>
                     <SelectTrigger>
                       <SelectValue placeholder="Выберите срок" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="month">До 1 месяца - 500 ₽</SelectItem>
-                      <SelectItem value="week">До 1 недели - 1 000 ₽</SelectItem>
-                      <SelectItem value="days3">До 3 дней - 2 000 ₽</SelectItem>
-                      <SelectItem value="day">День в день - 5 000 ₽</SelectItem>
+                      <SelectItem value="1.0">2-4 недели (стандарт)</SelectItem>
+                      <SelectItem value="1.4">1 неделя (срочный)</SelectItem>
+                      <SelectItem value="1.8">3 дня (экстренный)</SelectItem>
                     </SelectContent>
                   </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="art-skill">Уровень художника</Label>
+                  <Select value={artSkill} onValueChange={setArtSkill}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Выберите уровень" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0.8">Начинающий</SelectItem>
+                      <SelectItem value="1.2">Опытный</SelectItem>
+                      <SelectItem value="2.0">Профессионал</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <Label>Дополнительные услуги</Label>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="extra-sketch" 
+                      checked={extraSketch}
+                      onCheckedChange={(checked) => setExtraSketch(checked as boolean)}
+                    />
+                    <label htmlFor="extra-sketch" className="text-sm cursor-pointer">
+                      Эскиз (+1 500 ₽)
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="extra-frame" 
+                      checked={extraFrame}
+                      onCheckedChange={(checked) => setExtraFrame(checked as boolean)}
+                    />
+                    <label htmlFor="extra-frame" className="text-sm cursor-pointer">
+                      Подбор рамы (+3 000 ₽)
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="extra-delivery" 
+                      checked={extraDelivery}
+                      onCheckedChange={(checked) => setExtraDelivery(checked as boolean)}
+                    />
+                    <label htmlFor="extra-delivery" className="text-sm cursor-pointer">
+                      Доставка (+1 000 ₽)
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="extra-certificate" 
+                      checked={extraCertificate}
+                      onCheckedChange={(checked) => setExtraCertificate(checked as boolean)}
+                    />
+                    <label htmlFor="extra-certificate" className="text-sm cursor-pointer">
+                      Сертификат авторства (+1 000 ₽)
+                    </label>
+                  </div>
                 </div>
               </div>
               
@@ -435,7 +511,6 @@ export default function Index() {
                 onClick={calculateNewPrice} 
                 size="lg" 
                 className="w-full text-lg"
-                disabled={!artSize || !artTechnique || !artStyle || !artDeadline}
               >
                 <Icon name="Calculator" className="mr-2" />
                 Рассчитать стоимость
