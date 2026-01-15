@@ -514,7 +514,6 @@ export default function Index() {
                 </div>
               </Card>
             </div>
-          </div>
           
           <div className="mb-16">
             <h3 className="text-4xl font-bold mb-8 text-center text-foreground">Отзывы клиентов</h3>
