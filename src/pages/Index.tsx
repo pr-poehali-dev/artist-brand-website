@@ -401,7 +401,7 @@ export default function Index() {
               
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="art-technique">Техника исполнения</Label>
+                  <Label htmlFor="art-technique">Техника</Label>
                   <Select value={artTechnique} onValueChange={setArtTechnique}>
                     <SelectTrigger>
                       <SelectValue placeholder="Выберите технику" />
@@ -417,15 +417,15 @@ export default function Index() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="art-complexity">Сложность композиции</Label>
+                  <Label htmlFor="art-complexity">Сложность</Label>
                   <Select value={artComplexity} onValueChange={setArtComplexity}>
                     <SelectTrigger>
                       <SelectValue placeholder="Выберите сложность" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1.0">Простой мотив (абстракция, один объект)</SelectItem>
-                      <SelectItem value="1.3">Средняя (пейзаж, натюрморт 3-5 объектов)</SelectItem>
-                      <SelectItem value="1.8">Высокая (портрет, многофигурная сцена)</SelectItem>
+                      <SelectItem value="1.0">Простой мотив</SelectItem>
+                      <SelectItem value="1.3">Средняя сложность</SelectItem>
+                      <SelectItem value="1.8">Высокая сложность</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -439,9 +439,9 @@ export default function Index() {
                       <SelectValue placeholder="Выберите срок" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1.0">2-4 недели (стандарт)</SelectItem>
-                      <SelectItem value="1.4">1 неделя (срочный)</SelectItem>
-                      <SelectItem value="1.8">3 дня (экстренный)</SelectItem>
+                      <SelectItem value="1.0">2-4 недели</SelectItem>
+                      <SelectItem value="1.4">1 неделя</SelectItem>
+                      <SelectItem value="1.8">3 дня</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -471,7 +471,7 @@ export default function Index() {
                       onCheckedChange={(checked) => setExtraSketch(checked as boolean)}
                     />
                     <label htmlFor="extra-sketch" className="text-sm cursor-pointer">
-                      Эскиз (+1 500 ₽)
+                      Эскиз
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -481,7 +481,7 @@ export default function Index() {
                       onCheckedChange={(checked) => setExtraFrame(checked as boolean)}
                     />
                     <label htmlFor="extra-frame" className="text-sm cursor-pointer">
-                      Подбор рамы (+3 000 ₽)
+                      Подбор рамы
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -491,7 +491,7 @@ export default function Index() {
                       onCheckedChange={(checked) => setExtraDelivery(checked as boolean)}
                     />
                     <label htmlFor="extra-delivery" className="text-sm cursor-pointer">
-                      Доставка (+1 000 ₽)
+                      Доставка
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -501,7 +501,7 @@ export default function Index() {
                       onCheckedChange={(checked) => setExtraCertificate(checked as boolean)}
                     />
                     <label htmlFor="extra-certificate" className="text-sm cursor-pointer">
-                      Сертификат авторства (+1 000 ₽)
+                      Сертификат авторства
                     </label>
                   </div>
                 </div>
