@@ -17,7 +17,7 @@ const artworks = [
   { id: 2, title: 'Портрет мужчины', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/8e470f5f-0d29-4db4-b869-aa6de23d3be8.jpg', size: '50x70 см', year: '2024' },
   { id: 3, title: 'Сельская идиллия', category: 'landscape', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/2076d825-dab6-411c-9a31-dcbdadaae78e.jpg', size: '70x90 см', year: '2025' },
   { id: 4, title: 'Натюрморт с цветами', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/c90beacd-2399-4fb6-bd0c-a79657f40f84.jpg', size: '60x80 см', year: '2025' },
-  { id: 5, title: 'Розы на мольберте', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/2e94feac-8508-4fce-901a-9b5ae9b27cf9.jpg', size: '50x60 см', year: '2024' },
+  { id: 5, title: 'Розы на мольберте', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/1dd38108-3097-4ff0-bbdb-1515359f4d5d.jpeg', size: '50x60 см', year: '2024' },
 ];
 
 const courses = [
