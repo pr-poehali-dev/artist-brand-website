@@ -13,12 +13,11 @@ import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 
 const artworks = [
-  { id: 1, title: 'Абстрактная композиция', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '80x120 см', year: '2025' },
-  { id: 2, title: 'Городской пейзаж', category: 'landscape', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '90x120 см', year: '2024' },
-  { id: 3, title: 'Портрет в синем', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '60x80 см', year: '2024' },
-  { id: 4, title: 'Морской бриз', category: 'landscape', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '100x150 см', year: '2025' },
-  { id: 5, title: 'Геометрия цвета', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '70x100 см', year: '2024' },
-  { id: 6, title: 'Женский образ', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/files/dcab409d-04d2-47a6-aa38-b4f05e183cdf.jpg', size: '50x70 см', year: '2025' },
+  { id: 1, title: 'Детство и арбуз', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/57850c3f-279f-41fe-b2d9-786edc39993c.jpg', size: '30x40 см', year: '2024' },
+  { id: 2, title: 'Портрет мужчины', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/8e470f5f-0d29-4db4-b869-aa6de23d3be8.jpg', size: '50x70 см', year: '2024' },
+  { id: 3, title: 'Сельская идиллия', category: 'landscape', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/2076d825-dab6-411c-9a31-dcbdadaae78e.jpg', size: '70x90 см', year: '2025' },
+  { id: 4, title: 'Натюрморт с цветами', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/c90beacd-2399-4fb6-bd0c-a79657f40f84.jpg', size: '60x80 см', year: '2025' },
+  { id: 5, title: 'Розы на мольберте', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/2e94feac-8508-4fce-901a-9b5ae9b27cf9.jpg', size: '50x60 см', year: '2024' },
 ];
 
 const courses = [
