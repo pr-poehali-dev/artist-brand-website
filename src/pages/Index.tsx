@@ -660,6 +660,143 @@ export default function Index() {
           <h2 className="text-5xl font-bold mb-4 text-center text-primary">АРТ-СТАРТ</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">Обучение искусству от практикующего художника</p>
           
+          <Card className="p-8 mb-12 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+            <div className="prose prose-sm max-w-none text-foreground">
+              <h3 className="text-2xl font-bold mb-4 text-primary">Программа подготовительных курсов для поступления в художественное училище (РХУ им. М. Б. Грекова)</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Цель программы</h4>
+                  <p className="text-muted-foreground">Подготовить абитуриентов к успешному прохождению вступительных творческих испытаний (рисунок, живопись, композиция) и сформировать базовый уровень профессиональных навыков.</p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Продолжительность</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>Стандартный курс: 8–10 месяцев (сентябрь–июнь)</li>
+                    <li>Интенсив: 3–4 месяца (перед вступительными экзаменами)</li>
+                    <li>Краткосрочные модули: 1–2 месяца по отдельным дисциплинам</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Объём учебной нагрузки</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>Базовый курс: 160–240 академических часов (45 мин./час)</li>
+                    <li>Интенсив: 60–100 часов</li>
+                    <li>Модуль: 20–40 часов на дисциплину</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-3">Основные дисциплины и содержание</h4>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <h5 className="font-semibold mb-1">Академический рисунок (40–60 % общего времени)</h5>
+                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 ml-4">
+                        <li>основы перспективы и пропорций</li>
+                        <li>построение геометрических тел</li>
+                        <li>натюрморт (простые предметы, драпировки)</li>
+                        <li>голова и фигура человека (базовые схемы)</li>
+                        <li>светотеневая моделировка формы</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h5 className="font-semibold mb-1">Живопись (25–35 % времени)</h5>
+                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 ml-4">
+                        <li>цветоведение: цветовой круг, гармония, контрасты</li>
+                        <li>техники работы с гуашью, акварелью, темперой</li>
+                        <li>этюды натюрмортов и пейзажей</li>
+                        <li>передача материальности (стекло, металл, ткань)</li>
+                        <li>работа с натуры и по представлению</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h5 className="font-semibold mb-1">Композиция (15–25 % времени)</h5>
+                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 ml-4">
+                        <li>законы композиции: ритм, равновесие, доминанта</li>
+                        <li>эскизирование и поиск идеи</li>
+                        <li>работа с форматом (вертикаль, горизонталь, квадрат)</li>
+                        <li>стилизация и образное решение</li>
+                        <li>подготовка к тематическим заданиям вступительных экзаменов</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h5 className="font-semibold mb-1">История искусств (вводно‑обзорный модуль, 5–10 %)</h5>
+                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 ml-4">
+                        <li>ключевые эпохи и стили</li>
+                        <li>анализ композиций мастеров</li>
+                        <li>связь традиции и современности</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Форматы занятий</h4>
+                  <div className="space-y-2">
+                    <p className="text-muted-foreground"><strong>Очные:</strong> мастерские училища (мольберты, натурный фонд, материалы)</p>
+                    <div>
+                      <p className="text-muted-foreground mb-1"><strong>Онлайн (при адаптации):</strong></p>
+                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 ml-4">
+                        <li>вебинары с демонстрацией техник</li>
+                        <li>загрузка фото работ в LMS‑систему</li>
+                        <li>видеоразбор ошибок</li>
+                        <li>живые сессии коррекции</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Методы обучения</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li><strong>Наглядность:</strong> показ приёмов преподавателем, анализ образцов</li>
+                    <li><strong>Поэтапность:</strong> от простых упражнений к сложным задачам</li>
+                    <li><strong>Практика:</strong> не менее 70 % времени — выполнение заданий</li>
+                    <li><strong>Обратная связь:</strong> индивидуальные комментарии, групповые просмотры</li>
+                    <li><strong>Самостоятельная работа:</strong> домашние этюды и эскизы</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Материалы (базовый набор)</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li><strong>Рисунок:</strong> карандаши (Н–6В), ластики, бумага А3–А2, уголь, сангина</li>
+                    <li><strong>Живопись:</strong> гуашь/акварель (12–24 цвета), кисти (белка, синтетика), палитра, вода, бумага/холст</li>
+                    <li><strong>Композиция:</strong> тушь, перо, маркеры, цветная бумага, клей</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Ожидаемые результаты</h4>
+                  <p className="text-muted-foreground mb-2">К концу курса абитуриент должен:</p>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>уверенно строить простые формы и фигуры</li>
+                    <li>передавать объём и пространство через свет и тень</li>
+                    <li>работать с цветом в рамках заданной гаммы</li>
+                    <li>создавать гармоничные композиции по теме</li>
+                    <li>понимать критерии оценки вступительных работ</li>
+                    <li>собрать портфолио из 5–10 лучших работ для экзамена</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Контроль успеваемости</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li><strong>Текущие просмотры:</strong> раз в 2–4 недели (оценка эскизов, этюдов)</li>
+                    <li><strong>Промежуточный экзамен:</strong> имитация вступительного испытания (4–6 часов)</li>
+                    <li><strong>Итоговое занятие:</strong> презентация портфолио, разбор ошибок, рекомендации</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Card>
+          
           <div className="grid md:grid-cols-2 gap-8">
             {courses.map((course, index) => (
               <Card 
