@@ -18,6 +18,9 @@ const artworks = [
   { id: 3, title: 'Сельская идиллия', category: 'landscape', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/2076d825-dab6-411c-9a31-dcbdadaae78e.jpg', size: '70x90 см', year: '2025' },
   { id: 4, title: 'Натюрморт с цветами', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/c90beacd-2399-4fb6-bd0c-a79657f40f84.jpg', size: '60x80 см', year: '2025' },
   { id: 5, title: 'Розы на мольберте', category: 'abstraction', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/1dd38108-3097-4ff0-bbdb-1515359f4d5d.jpeg', size: '50x60 см', year: '2024' },
+  { id: 6, title: 'Пират с попугаем', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/8c1e74ca-14fe-4c05-ad9e-74f2c8f9d684.jpeg', size: '40x50 см', year: '2024' },
+  { id: 7, title: 'Святой Николай', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/b6bec4bf-dca1-4801-9e57-58163174ca0a.jpeg', size: '60x80 см', year: '2025' },
+  { id: 8, title: 'Рыжая улыбка', category: 'portrait', image: 'https://cdn.poehali.dev/projects/28643ce9-b3f7-4afe-bfc0-48579d49a90a/bucket/cf4df24c-65fd-4b1f-b215-99b0d22a14e8.jpeg', size: '40x50 см', year: '2025' },
 ];
 
 const courses = [
